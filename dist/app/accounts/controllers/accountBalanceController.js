@@ -12,12 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOwners = void 0;
-const getNftOwners_1 = require("../utils/getNftOwners");
-const config_1 = __importDefault(require("../config"));
-const getOwners = (res, req) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress).then((data) => {
-        return res.status(200).send({ 'status': 'ok', data });
+exports.getBalance = void 0;
+const getNftOwners_1 = require("../../owners/utils/getNftOwners");
+const getAccountBalance_1 = require("../utils/getAccountBalance");
+const config_1 = __importDefault(require("../../config"));
+const getBalance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const page = req.query.page;
+    const limit = req.query.limit;
+    const offset = (page - 1) * limit;
+    const range = page * limit;
+    yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress).then((ownerAddresses) => {
+        const data = (0, getAccountBalance_1.getAccountBalance)(ownerAddresses, offset, range);
+        return res.status(200).send({ 'status': 'ok', balance: data });
     });
 });
-exports.getOwners = getOwners;
+exports.getBalance = getBalance;

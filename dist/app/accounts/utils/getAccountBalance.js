@@ -8,16 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOwners = void 0;
-const getNftOwners_1 = require("../utils/getNftOwners");
-const config_1 = __importDefault(require("../config"));
-const getOwners = (res, req) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress).then((data) => {
-        return res.status(200).send({ 'status': 'ok', data });
+exports.getAccountBalance = void 0;
+const web3_1 = require("../../config/web3");
+function getAccountBalance(addrs, offset = 0, range = 10) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const reqs = [];
+        for (const address of addrs.slice(offset, range)) {
+            const balance = web3_1.web3.eth.getBalance(address);
+            reqs.push({ balance: balance, address });
+        }
+        const data = yield Promise.all(reqs);
+        const resp = yield Promise.all(data.map((item) => __awaiter(this, void 0, void 0, function* () { return (Object.assign(Object.assign({}, item), { balance: web3_1.web3.utils.fromWei(yield item.balance) })); })));
+        return ({ resp });
     });
-});
-exports.getOwners = getOwners;
+}
+exports.getAccountBalance = getAccountBalance;

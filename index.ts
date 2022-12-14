@@ -1,28 +1,29 @@
 // use strict-mode;
 'use strict';
-import express from "express";
+import express from 'express';
+import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import appConfig from './app/config';
-import getOwnersRoute from './app/routes/getOwnersRoute';
-import getAccountBalanceRoute from './app/routes/getAccountBalanceRoute';
+import routes from './app/routes';
 
-import { getOwners } from './app/controllers/ownersController';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-
+app.use(bodyParser.json({ limit: "1mb" }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req: any, res: any) => {
     res.send('Hamilton ETH API');
 });
-app.get('api/nft/owners', getOwnersRoute);
-app.get('api/eth/balances', getAccountBalanceRoute);
+
+app.use('/api', routes)
 
 app.listen(appConfig.port, () => {
 
     console.log(`[server]: Server is running at https://localhost:${appConfig.port}`);
 });
+
 

@@ -14,10 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOwners = void 0;
 const getNftOwners_1 = require("../utils/getNftOwners");
-const config_1 = __importDefault(require("../config"));
-const getOwners = (res, req) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress).then((data) => {
-        return res.status(200).send({ 'status': 'ok', data });
-    });
+const config_1 = __importDefault(require("../../config"));
+const getOwners = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress);
+    return res.json({ 'status': 'ok', data });
 });
 exports.getOwners = getOwners;

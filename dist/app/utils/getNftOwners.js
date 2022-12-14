@@ -12,12 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOwners = void 0;
-const getNftOwners_1 = require("../utils/getNftOwners");
-const config_1 = __importDefault(require("../config"));
-const getOwners = (res, req) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress).then((data) => {
-        return res.status(200).send({ 'status': 'ok', data });
+exports.getNftOwners = void 0;
+const alchemy_1 = __importDefault(require("../config/alchemy"));
+function getNftOwners(contractAddress) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { owners: collection1 } = yield alchemy_1.default.nft.getOwnersForContract(contractAddress[0]);
+        const { owners: collection2 } = yield alchemy_1.default.nft.getOwnersForContract(contractAddress[1]);
+        const data = collection1.filter((addr) => collection2.indexOf(addr) !== -1);
+        return data;
     });
-});
-exports.getOwners = getOwners;
+}
+exports.getNftOwners = getNftOwners;

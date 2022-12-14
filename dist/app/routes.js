@@ -1,7 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const ownersController_1 = require("./controllers/ownersController");
+const routes_1 = __importDefault(require("../app/owners/routes"));
+const routes_2 = __importDefault(require("../app/accounts/routes"));
 const router = (0, express_1.Router)();
-router.get('api/nft/owners', ownersController_1.getOwners);
+router.use('/nft', routes_1.default);
+router.use('/accounts', routes_2.default);
 exports.default = router;

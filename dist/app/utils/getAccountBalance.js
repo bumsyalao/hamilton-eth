@@ -18,7 +18,6 @@ function getAccountBalance(addrs, offset = 0, range = 10) {
             const balance = web3_1.web3.eth.getBalance(address);
             reqs.push({ balance: balance, address });
         }
-        console.log('---got here ----');
         const data = yield Promise.all(reqs);
         const resp = yield Promise.all(data.map((item) => __awaiter(this, void 0, void 0, function* () { return (Object.assign(Object.assign({}, item), { balance: web3_1.web3.utils.fromWei(yield item.balance) })); })));
         console.log({ resp });

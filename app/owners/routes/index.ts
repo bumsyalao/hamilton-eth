@@ -3,7 +3,7 @@ import { getOwners } from '../controllers/ownersController';
 
 const router = Router();
 
-router.get('api/eth/balances', getOwners);
+router.get('/owners', getOwners);
 
 
 export default router;

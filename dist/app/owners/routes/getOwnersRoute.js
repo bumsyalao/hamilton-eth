@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const accountBalanceController_1 = require("../controllers/accountBalanceController");
+const ownersController_1 = require("../controllers/ownersController");
 const router = (0, express_1.Router)();
-router.get('account', accountBalanceController_1.getBalance);
+router.get('nft', ownersController_1.getOwners);
 exports.default = router;

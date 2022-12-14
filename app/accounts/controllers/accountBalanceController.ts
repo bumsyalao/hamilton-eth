@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { getNftOwners } from '../utils/get-nft-owners';
+import { getNftOwners } from '../../owners/utils/getNftOwners';
 import { getAccountBalance } from '../utils/getAccountBalance';
-import appConfig from '../config';
+import appConfig from '../../config';
 
 
-export const getBalance = async (res: Response, req: Request) => {
+export const getBalance = async (req: Request, res: Response) => {
     const page: any = req.query.page;
     const limit: any = req.query.limit;
     const offset = (page - 1) * limit;

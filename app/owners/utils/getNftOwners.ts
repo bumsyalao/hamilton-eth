@@ -1,4 +1,4 @@
-import alchemy from '../config/alchemy';
+import alchemy from '../../config/alchemy';
 
 
 export async function getNftOwners(contractAddress: string[]) {
