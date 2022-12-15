@@ -18,7 +18,8 @@ Example Response:
             ]
     } 
 ```
-2. Balance of an owner who owns both tokens. This endpoint is paginated and returns data for the page and limit set in the URL 
+2. Balance of an owner who owns both tokens. This endpoint is paginated and returns data for the page and limit set in the URL.
+
 Example Response:
 ```
     {
