@@ -16,14 +16,21 @@ exports.getBalance = void 0;
 const getNftOwners_1 = require("../../owners/utils/getNftOwners");
 const getAccountBalance_1 = require("../utils/getAccountBalance");
 const config_1 = __importDefault(require("../../config"));
+/**
+ * Gets account balance
+ * Route: GET: /nft/accounts/balance
+ * @param {object} req object
+ * @param {object} res object
+ * @returns {response} response object
+ */
 const getBalance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const page = req.query.page;
-    const limit = req.query.limit;
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+    const url = req.url || '';
     const offset = (page - 1) * limit;
     const range = page * limit;
-    yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress).then((ownerAddresses) => {
-        const data = (0, getAccountBalance_1.getAccountBalance)(ownerAddresses, offset, range);
-        return res.status(200).send({ 'status': 'ok', balance: data });
-    });
+    const ownerAddresses = yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress, url);
+    const data = yield (0, getAccountBalance_1.getAccountBalance)(ownerAddresses, url, offset, range);
+    return res.status(200).send({ 'status': 'ok', data });
 });
 exports.getBalance = getBalance;

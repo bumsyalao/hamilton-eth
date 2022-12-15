@@ -16,7 +16,8 @@ exports.getOwners = void 0;
 const getNftOwners_1 = require("../utils/getNftOwners");
 const config_1 = __importDefault(require("../../config"));
 const getOwners = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress);
+    const url = req.url || '';
+    const data = yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress, url);
     return res.json({ 'status': 'ok', data });
 });
 exports.getOwners = getOwners;
