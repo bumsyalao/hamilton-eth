@@ -18,7 +18,7 @@ Example Response:
             ]
     } 
 ```
-2. Balance of an owner who owns both tokens.
+2. Balance of an owner who owns both tokens. This endpoint is paginated and returns data for the page and limit set in the URL 
 Example Response:
 ```
     {
@@ -29,6 +29,7 @@ Example Response:
 ## Development
 
 This simple app was built with NodeJS with expressJS to create API server, Redis was used to cache persisted data.
+
 > I set Redis cache with a cacheKey containing url, contract addresses and page & limit for pagination and URL to distinguish between account/balance and nft/owner. Cached data has an expiry time of 1hour.
 
 ## Installation
