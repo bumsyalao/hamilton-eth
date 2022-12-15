@@ -1,12 +1,8 @@
 
-import * as redis from 'redis';
 import { web3 } from '../../config/web3';
 
-const redisClient = redis.createClient();
-redisClient.on('connect', () => { console.log("Redis connection successful") });
 
-export async function getAccountBalance(addrs: string[], url: string, offset: number = 0, range: number = 10) {
-    const cacheKey = url + offset + range;
+export async function getAccountBalance(addrs: string[], offset: number = 0, range: number = 10) {
 
     const reqs = [];
     for (const address of addrs.slice(offset, range)) {

@@ -26,10 +26,15 @@ Example Response:
         balance: [balance],
     }
 ```
+## Development
+
+This simple app was built with NodeJS with expressJS to create API server, Redis was used to cache persisted data.
+> I set Redis cache with a cacheKey containing url, contract addresses and page & limit for pagination and URL to distinguish between account/balance and nft/owner. Cached data has an expiry time of 1hour.
 
 ## Installation
 This App requires:
 - [Node.js](https://nodejs.org) version 8 or above.
+- [Redis](https://redis.io/).
 
 Install all dependencies:
 ```bash
