@@ -31,7 +31,7 @@ export const getBalance = async (req: Request, res: Response) => {
             const ownerAddresses = await getNftOwners(appConfig.contractAddress);
             const data = await getAccountBalance(ownerAddresses, offset, range);
             redisClient
-                .set(cacheKey, JSON.stringify(data), 'EX', 60 * 60, async (saveErr, saved) => {
+                .set(cacheKey, JSON.stringify(data), 'EX', 30, async (saveErr, saved) => {
                     if (saveErr) {
                         return res.status(500).json({ err: saveErr })
                     }
