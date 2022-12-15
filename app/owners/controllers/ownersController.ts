@@ -28,7 +28,7 @@ export const getOwners = async (req: Request, res: Response) => {
             const data = await getNftOwners(appConfig.contractAddress);
 
             redisClient
-                .set(cacheKey, JSON.stringify(data), 'EX', 30, async (saveErr, saved) => {
+                .set(cacheKey, JSON.stringify(data), 'EX', 60 * 60, async (saveErr, saved) => {
                     if (saveErr) {
                         return res.status(500).json({ err: saveErr })
                     }

@@ -65,7 +65,7 @@ const getBalance = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             const ownerAddresses = yield (0, getNftOwners_1.getNftOwners)(config_1.default.contractAddress);
             const data = yield (0, getAccountBalance_1.getAccountBalance)(ownerAddresses, offset, range);
             redisClient
-                .set(cacheKey, JSON.stringify(data), 'EX', 60 * 60, (saveErr, saved) => __awaiter(void 0, void 0, void 0, function* () {
+                .set(cacheKey, JSON.stringify(data), 'EX', 60 * 3, (saveErr, saved) => __awaiter(void 0, void 0, void 0, function* () {
                 if (saveErr) {
                     return res.status(500).json({ err: saveErr });
                 }
